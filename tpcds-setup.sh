@@ -82,7 +82,7 @@ for t in ${FACTS}
 do
 	echo "Optimizing table $t ($i/$total)."
 	COMMAND="hive -i settings/load-partitioned.sql -f ddl-tpcds/bin_partitioned/${t}.sql \
-	    -d DB=tpcds_bin_partitioned_${FORMAT}_${SCALE} \
+	    -d DB=${DATABASE} \
 	    -d SOURCE=tpcds_text_${SCALE} -d BUCKETS=${BUCKETS} \
 	    -d RETURN_BUCKETS=${RETURN_BUCKETS} -d FILE=${FORMAT}"
 	runcommand "$COMMAND"
@@ -98,7 +98,7 @@ for t in ${DIMS}
 do
 	echo "Optimizing table $t ($i/$total)."
 	COMMAND="hive -i settings/load-partitioned.sql -f ddl-tpcds/bin_partitioned/${t}.sql \
-	    -d DB=tpcds_bin_partitioned_${FORMAT}_${SCALE} -d SOURCE=tpcds_text_${SCALE} \
+	    -d DB=${DATABASE} -d SOURCE=tpcds_text_${SCALE} \
 	    -d FILE=${FORMAT}"
 	runcommand "$COMMAND"
 	if [ $? -ne 0 ]; then
