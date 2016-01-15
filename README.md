@@ -32,6 +32,8 @@ All of these steps should be carried out on your Hadoop cluster.
 
 - Step 3: Compile and package the appropriate data generator.
 
+  **NOTE for TPC-DS**; ```./tpcds-gen/Makefile``` attempts a curl operation from http://www.tpc.org/tpcds/dsgen/dsgen-download-files.asp?download_key=NaN to retrieve the needed TCP-DS zip file, but that will fail.  Visit that URL from a browser which require you complete a download request form.  An email will be sent to you that will allow you to download a file called ```DSTools.zip``` which you then need to rename to ```tpcds_kit.zip``` (as the Makefile was previously able to do) and copy into ```./tpcds-gen``` directory.  **This must be done prior to running the ```./tpcds-build.sh``` script.**  Fortunately, the similiar TPC-H process is able to create its respective ```tpch_kit.zip``` without problems.  *The "better" fix* is to update ```./tpcds-gen/Makefile``` with a URL that will allow direct download of the TPC-DS zip file.
+  
   For TPC-DS, ```./tpcds-build.sh``` downloads, compiles and packages the TPC-DS data generator.
   For TPC-H, ```./tpch-build.sh``` downloads, compiles and packages the TPC-H data generator.
 
@@ -47,15 +49,15 @@ All of these steps should be carried out on your Hadoop cluster.
 
   Some examples:
 
-  Build 1 TB of TPC-DS data: ```./tpcds-setup 1000```
+  Build 1 TB of TPC-DS data: ```./tpcds-setup.sh 1000```
 
-  Build 1 TB of TPC-H data: ```./tpch-setup 1000```
+  Build 1 TB of TPC-H data: ```./tpch-setup.sh 1000```
 
-  Build 100 TB of TPC-DS data: ```./tpcds-setup 100000```
+  Build 100 TB of TPC-DS data: ```./tpcds-setup.sh 100000```
 
-  Build 30 TB of text formatted TPC-DS data: ```FORMAT=textfile ./tpcds-setup 30000```
+  Build 30 TB of text formatted TPC-DS data: ```FORMAT=textfile ./tpcds-setup.sh 30000```
 
-  Build 30 TB of RCFile formatted TPC-DS data: ```FORMAT=rcfile ./tpcds-setup 30000```
+  Build 30 TB of RCFile formatted TPC-DS data: ```FORMAT=rcfile ./tpcds-setup.sh 30000```
 
 - Step 6: Run queries.
 
