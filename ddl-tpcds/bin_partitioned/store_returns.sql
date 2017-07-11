@@ -76,3 +76,4 @@ select
         sr.sr_returned_date_sk
         where sr.sr_returned_date_sk is null
         sort by sr.sr_returned_date_sk
+;
